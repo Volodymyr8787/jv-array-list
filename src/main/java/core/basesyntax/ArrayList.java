@@ -29,9 +29,7 @@ public class ArrayList<T> implements List<T> {
             grow();
         }
 
-        for (int i = size; i > index; i--) {
-            elementData[i] = elementData[i - 1];
-        }
+        System.arraycopy(elementData, index, elementData, index + 1, size - index);
 
         elementData[index] = value;
         size++;
@@ -62,9 +60,7 @@ public class ArrayList<T> implements List<T> {
 
         final T removed = (T) elementData[index];
 
-        for (int i = index; i < size - 1; i++) {
-            elementData[i] = elementData[i + 1];
-        }
+        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
 
         size--;
         elementData[size] = null;
@@ -97,9 +93,7 @@ public class ArrayList<T> implements List<T> {
         int newCapacity = elementData.length + elementData.length / 2;
         Object[] newArray = new Object[newCapacity];
 
-        for (int i = 0; i < size; i++) {
-            newArray[i] = elementData[i];
-        }
+        System.arraycopy(elementData, 0, newArray, 0, size);
 
         elementData = newArray;
     }
